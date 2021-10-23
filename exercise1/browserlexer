@@ -1,0 +1,23 @@
+%%
+
+%public
+%class browserlexer
+%type int
+%eofval{
+    System.out.println("EOF reached");
+    return -1;
+%eofval}
+
+a = (a|A)
+b = (b|B)
+
+ws = [ \t\r\n\b\015]+
+
+%%
+"<"(h|H)(t|T)(m|M)(l|L)">"  { System.out.println(yytext()); }
+"</"(h|H)(t|T)(m|M)(l|L)">" { System.out.println(yytext()); }
+"<"{b}">"         { System.out.println(yytext()); }
+"</"{b}">"        { System.out.println(yytext()); }
+[^\<]+            { System.out.println(yytext()); }
+{ws}              { System.out.println(yytext()); }
+.                 { System.out.println("FEHLER: "+yytext()); }
